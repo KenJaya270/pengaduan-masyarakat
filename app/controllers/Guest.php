@@ -17,10 +17,11 @@ class Guest extends Controller
 
     public function pengaduan()
     {
+        session_destroy();
+        unset($_SESSION['user-login']);
         Middleware::level('');
         $data['judul'] = 'Guest/pengaduan';
         $data['body-color'] = '';
-
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);
         $this->view('guest/pengaduan');

@@ -49,7 +49,7 @@
                 <?php if (!isset($_SESSION['user-login'])) : ?>
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Guest</span>
                 <?php else : ?>
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $data['user']['username']; ?></span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION['user-login']['username']; ?></span>
                 <?php endif; ?>
             </a>
             <!-- Dropdown - User Information -->
