@@ -3,7 +3,7 @@
     <div class="container mb-5">
         <h2 class="text-dark">Keluhan-keluhan Masyarakat</h2>
         <?php foreach ($data['allKeluhan'] as $keluhan) : ?>
-            <a class="container mt-1" href="<?= BASEURL ?>/petugas/lihatKeluhan/<?= $keluhan['id_pengaduan'] ?>">
+            <a class="container mt-1">
                 <ul class=" p-0">
                     <li class="bg-light p-3 list-group-item rounded d-flex justify-content-between">
                         <div class="d-flex align-items-center">
@@ -22,8 +22,6 @@
                                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Aksi:</div>
-                                        <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="<?= BASEURL ?>/petugas/sudahDibaca/<?= $keluhan['id_pengaduan'] ?>">Tandai Sudah Dibaca</a>
                                     </div>
                                 </div>
