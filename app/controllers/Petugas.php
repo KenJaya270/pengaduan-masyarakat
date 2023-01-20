@@ -19,5 +19,7 @@ class Petugas extends Controller
     public function sudahDibaca($id)
     {
         $this->model('Petugas_model')->markAsRead($id);
+        header('Location: ' . BASEURL . '/petugas');
+        exit;
     }
 }
