@@ -9,9 +9,15 @@ class Petugas extends Controller
         $data['judul'] = 'Petugas/index';
         $data['body-color'] = $this->bodyColor;
         $data['user'] = $_SESSION['user-login'];
+        $data['allKeluhan'] = $this->model('Petugas_model')->getAllKeluhan();
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);
-        $this->view('petugas/index');
+        $this->view('petugas/index', $data);
         $this->view('templates/footer');
+    }
+
+    public function sudahDibaca($id)
+    {
+        $this->model('Petugas_model')->markAsRead($id);
     }
 }
