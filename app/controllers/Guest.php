@@ -2,13 +2,18 @@
 class Guest extends Controller
 {
     private $bodyColor = '#4e73df';
+    private $navItem1 = '';
+    private $navItem2 = '';
+    private $navMethod1 = '';
+    private $navMethod2 = '';
     public function index()
     {
-        session_destroy();
-        unset($_SESSION['user-login']);
-        Middleware::level('');
         $data['judul'] = 'Guest/index';
         $data['body-color'] = $this->bodyColor;
+        $data['nav-item1'] = $this->navItem1;
+        $data['nav-item2'] = $this->navItem2;
+        $data['nav-method1'] = $this->navMethod1;
+        $data['nav-method2'] = $this->navMethod2;
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);
         $this->view('guest/index');
@@ -17,11 +22,12 @@ class Guest extends Controller
 
     public function pengaduan()
     {
-        session_destroy();
-        unset($_SESSION['user-login']);
-        Middleware::level('');
         $data['judul'] = 'Guest/pengaduan';
         $data['body-color'] = '';
+        $data['nav-item1'] = $this->navItem1;
+        $data['nav-item2'] = $this->navItem2;
+        $data['nav-method1'] = $this->navMethod1;
+        $data['nav-method2'] = $this->navMethod2;
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);
         $this->view('guest/pengaduan');

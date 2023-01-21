@@ -3,7 +3,7 @@
     <div class="container mb-5">
         <h2 class="text-dark">Keluhan-keluhan Masyarakat</h2>
         <?php foreach ($data['allKeluhan'] as $keluhan) : ?>
-            <a class="container mt-1">
+            <div class="container mt-1 p-0 no-decoration">
                 <ul class=" p-0">
                     <li class="bg-light p-3 list-group-item rounded d-flex justify-content-between">
                         <div class="d-flex align-items-center">
@@ -29,7 +29,7 @@
                         <?php endif; ?>
                     </li>
                 </ul>
-            </a>
+            </div>
         <?php endforeach; ?>
     </div>
 

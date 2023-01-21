@@ -18,7 +18,7 @@
     </form>
 
     <!-- Topbar Navbar -->
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto d-flex align-items-center">
 
         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
         <li class="nav-item dropdown no-arrow d-sm-none">
@@ -40,6 +40,12 @@
             </div>
         </li>
 
+        <li class="nav-item ms-2">
+            <a class="no-decoration text-dark" href="<?= BASEURL ?>/<?= $data['nav-method1'] ?>"><?= $data['nav-item1'] ?></a>
+        </li>
+        <li class="nav-item ms-2">
+            <a class="no-decoration text-dark" href="<?= BASEURL ?>/<?= $data['nav-method2'] ?>"><?= $data['nav-item2'] ?></a>
+        </li>
 
         <div class="topbar-divider d-none d-sm-block"></div>
 

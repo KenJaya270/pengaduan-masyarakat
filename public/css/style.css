@@ -40,3 +40,7 @@
     border-radius: 0.35rem;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+
+.no-decoration{
+    text-decoration: none;
+}

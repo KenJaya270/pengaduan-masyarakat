@@ -33,6 +33,5 @@ class Auth extends Controller
     {
         session_destroy();
         unset($_SESSION['user-login']);
-        Middleware::auth();
     }
 }

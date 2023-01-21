@@ -16,7 +16,7 @@ class Middleware
             exit;
         }
 
-        if (isset($_SESSION['user-login']) && $level != $level) {
+        if (!isset($_SESSION['user-login']) || $level != $level) {
             Functions::back();
             exit;
         }
