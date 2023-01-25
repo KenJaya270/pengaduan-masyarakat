@@ -17,8 +17,19 @@
 
         <form method="post" action="<?= BASEURL ?>/guest/insertAduan" enctype="multipart/form-data">
             <div class="mb-2">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" autocomplete="off">
+                <input type="hidden" class="form-control" id="tgl_pengaduan" name="tgl_pengaduan" value="<?= date('Y-m-d') ?>" autocomplete="off">
+            </div>
+            <div class="mb-2">
+                <label for="nik" class="form-label">NIK</label>
+                <input type="number" class="form-control" id="nik" name="nik" autocomplete="off">
+            </div>
+            <div class="mb-2">
+                <label for="nama" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="nama" name="nama" autocomplete="off">
+            </div>
+            <div class="mb-2">
+                <label for="telp" class="form-label">No. Telp</label>
+                <input type="number" class="form-control" id="telp" name="telp" autocomplete="off">
             </div>
             <div class="mb-2">
                 <label for="subjek" class="form-label">Subjek</label>
@@ -31,6 +42,9 @@
             <div class="mb-2">
                 <label for="foto" class="form-label">Foto</label>
                 <input type="file" class="form-control" id="foto" name="foto">
+            </div>
+            <div class="mb-2">
+                <input type="hidden" class="form-control" id="status" name="status" value="<?= date('d M Y') ?>" value="0" autocomplete="off">
             </div>
             <div class="">
                 <button type="submit" class="btn btn-primary">Submit!</button>

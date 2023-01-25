@@ -3,6 +3,7 @@ class Guest_model
 {
     private $db;
     private $table1 = 'pengaduan';
+    private $table2 = 'masyarakat';
     public function __construct()
     {
         $this->db = new Database();
@@ -39,15 +40,43 @@ class Guest_model
         }
     }
 
-    public function insertKeluhan($data, $data2)
+    public function validate()
     {
-        $query = "INSERT INTO {$this->table1} VALUES(null, :email, :subjek, :pengaduan, :foto)";
+        $query = "SELECT * FROM {$this->table2}  WHERE nik = :nik";
         $this->db->query($query);
-        $this->db->bind('email', $data['email']);
-        $this->db->bind('subjek', $data['subjek']);
-        $this->db->bind('pengaduan', $data['pengaduan']);
+        $this->db->bind('nik', $_POST['nik']);
+        return $this->db->rowCount();
+    }
+
+    public function validateAll()
+    {
+        $query = "SELECT * FROM {$this->table2} WHERE nik = :nik && nama = :nama";
+        $this->db->query($query);
+        $this->db->bind('nik', $_POST['nik']);
+        $this->db->bind('nama', $_POST['nama']);
+        return $this->db->rowCount();
+    }
+
+    public function insertUser()
+    {
+        $query = "INSERT INTO {$this->table2} VALUES(:nik, :nama, :telp)";
+        $this->db->query($query);
+        $this->db->bind('nik', $_POST['nik']);
+        $this->db->bind('nama', $_POST['nama']);
+        $this->db->bind('telp', $_POST['telp']);
+        return $this->db->rowCount();
+    }
+
+    public function insertKeluhan()
+    {
+        $query = "INSERT INTO {$this->table1} VALUES(null,:tgl_pengaduan, :nik, :subjek, :pengaduan, :foto, :status)";
+        $this->db->query($query);
+        $this->db->bind('tgl_pengaduan', $_POST['tgl_pengaduan']);
+        $this->db->bind('nik', $_POST['nik']);
+        $this->db->bind('subjek', $_POST['subjek']);
+        $this->db->bind('pengaduan', $_POST['pengaduan']);
         $this->db->bind('foto', $this->setFoto('foto'));
-        $this->db->execute();
+        $this->db->bind('status', '0');
         return $this->db->rowCount();
     }
 }

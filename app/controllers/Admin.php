@@ -9,7 +9,6 @@ class Admin extends Controller
 
     public function index()
     {
-        Middleware::auth();
         Middleware::level('admin');
         $data['judul'] = 'Admin/index';
         $data['body-color'] = $this->bodyColor;
@@ -21,12 +20,11 @@ class Admin extends Controller
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);
         $this->view('admin/index', $data);
-        $this->view('templates/footer');
+        $this->view('templates/footer', $data);
     }
 
     public function user()
     {
-        Middleware::auth();
         Middleware::level('admin');
         $data['judul'] = 'Admin/user';
         $data['body-color'] = $this->bodyColor;
@@ -38,12 +36,11 @@ class Admin extends Controller
         $this->view('templates/header', $data);
         $this->view('templates/navbar', $data);
         $this->view('admin/user', $data);
-        $this->view('templates/footer');
+        $this->view('templates/footer', $data);
     }
 
     public function lihatUser($id_user)
     {
-        Middleware::auth();
         Middleware::level('admin');
         $data['body-color'] = $this->bodyColor;
         $data['getUserByID'] = $this->model('Admin_model')->getUserByID($id_user);

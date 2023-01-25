@@ -12,12 +12,12 @@ class Middleware
     static function level($level)
     {
         if (isset($_SESSION['user-login']) && $level = '') {
-            Functions::back();
+            return Functions::back();
             exit;
         }
 
         if (!isset($_SESSION['user-login']) || $level != $level) {
-            Functions::back();
+            return Functions::back();
             exit;
         }
     }

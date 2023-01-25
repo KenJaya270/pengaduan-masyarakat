@@ -22,9 +22,9 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Nama Petugas</th>
                                 <th>Username</th>
-                                <th>Password</th>
-                                <th>Email</th>
+                                <th>Telephone</th>
                                 <th>Level</th>
                                 <th>Aksi</th>
                             </tr>
@@ -32,9 +32,9 @@
                         <tfoot>
                             <tr>
                                 <th>ID</th>
+                                <th>Nama Petugas</th>
                                 <th>Username</th>
-                                <th>Password</th>
-                                <th>Email</th>
+                                <th>Telephone</th>
                                 <th>Level</th>
                                 <th>Aksi</th>
                             </tr>
@@ -46,9 +46,9 @@
                                     <tr class="bg-gray-100">
                                     <?php endif; ?>
                                     <td><?= $i; ?></td>
+                                    <td><?= $petugas['nama_petugas'] ?></td>
                                     <td><?= $petugas['username']; ?></td>
-                                    <td><?= $petugas['password']; ?></td>
-                                    <td><?= $petugas['email']; ?></td>
+                                    <td><?= $petugas['telp']; ?></td>
                                     <td><?= $petugas['level']; ?></td>
                                     <td>
                                         <div class="dropdown no-arrow">
@@ -56,9 +56,9 @@
                                                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="aksi">
-                                                <a class="dropdown-item" href="<?= BASEURL ?>/admin/hapusUser/<?= $petugas['id_user'] ?>">Hapus</a>
+                                                <a class="dropdown-item" href="<?= BASEURL ?>/admin/hapusUser/<?= $petugas['id_petugas'] ?>">Hapus</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" data-toggle="modal" data-target="#editPetugas<?= $petugas['id_user'] ?>">Edit Petugas</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#editPetugas<?= $petugas['id_petugas'] ?>">Edit Petugas</a>
                                             </div>
                                         </div>
                                     </td>

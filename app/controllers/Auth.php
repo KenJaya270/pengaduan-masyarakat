@@ -33,5 +33,6 @@ class Auth extends Controller
     {
         session_destroy();
         unset($_SESSION['user-login']);
+        header('Location: ' . BASEURL);
     }
 }

@@ -35,15 +35,16 @@ class Guest extends Controller
     }
     public function insertAduan()
     {
-        Middleware::level('');
-        if ($this->model('Guest_model')->insertKeluhan($_POST, $_FILES) > 0) {
-            Flasher::setFlash('kirim', 'success', 'Keluhan Berhasil');
-            header('Location: ' . BASEURL . '/guest/pengaduan');
-            exit;
+        if ($this->model('Guest_model')->validate()) {
+            if (!$this->model('Guest_model')->validateAll()) {
+                Flasher::setFlash('', 'danger', 'Nama Salah atau NIK telah dipakai orang lain');
+                return Functions::back();
+            }
         } else {
-            Flasher::setFlash('kirim', 'danger', 'Keluhan Gagal');
-            header('Location: ' . BASEURL . '/guest/pengaduan');
-            exit;
+            $this->model('Guest_model')->insertUser();
         }
+        $this->model('Guest_model')->insertKeluhan();
+        Flasher::setFlash('', 'success', 'Berhasil Mengirim Keluhan!');
+        return header('Location: ' . BASEURL . '/guest/pengaduan');
     }
 }

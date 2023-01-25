@@ -3,8 +3,9 @@
 class Admin_model
 {
     private $db;
-    private $table1 = 'user';
+    private $table1 = 'petugas';
     private $table2 = 'pengaduan';
+    private $table3 = 'masyarakat';
 
     public function __construct()
     {
@@ -13,9 +14,8 @@ class Admin_model
 
     public function getAllKeluhan()
     {
-        $query = "SELECT * FROM {$this->table2}";
+        $query = "SELECT * FROM {$this->table3}, {$this->table2} WHERE {$this->table3}.nik = {$this->table2}.nik";
         $this->db->query($query);
-        $this->db->execute();
         return $this->db->setResults();
     }
 
@@ -23,7 +23,6 @@ class Admin_model
     {
         $query = "SELECT * FROM {$this->table1}";
         $this->db->query($query);
-        $this->db->execute();
         return $this->db->setResults();
     }
 
@@ -32,7 +31,6 @@ class Admin_model
         $query = "SELECT * FROM {$this->table1} WHERE id_user = :id_user";
         $this->db->query($query);
         $this->db->bind('id_user', $id_user);
-        $this->db->execute();
         return $this->db->single();
     }
 
@@ -43,7 +41,6 @@ class Admin_model
         $this->db->bind('id_user', $data['id_user']);
         $this->db->bind('username', $data['username']);
         $this->db->bind('email', $data['email']);
-        $this->db->execute();
         return $this->db->rowCount();
     }
 
@@ -52,7 +49,6 @@ class Admin_model
         $query = "DELETE FROM {$this->table1} WHERE id_user = :id_user";
         $this->db->query($query);
         $this->db->bind('id_user', $id);
-        $this->db->execute();
         return $this->db->rowCount();
     }
 }

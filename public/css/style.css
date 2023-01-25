@@ -41,6 +41,10 @@
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+.container:hover{
+    cursor: pointer;
+}
+
 .no-decoration{
     text-decoration: none;
 }
