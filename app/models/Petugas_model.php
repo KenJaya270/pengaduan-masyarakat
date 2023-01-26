@@ -25,7 +25,15 @@ class Petugas_model
 
     public function getAllKeluhan()
     {
-        $query = "SELECT * FROM {$this->table2}, {$this->table3} WHERE {$this->table2}.nik = {$this->table3}.nik";
+        $query = "SELECT {$this->table2}.*,
+        {$this->table3}.*,
+        {$this->table4}.id_tanggapan, 
+        {$this->table4}.tgl_tanggapan, 
+        {$this->table4}.tanggapan, 
+        {$this->table4}.id_petugas
+        FROM {$this->table2}
+        LEFT OUTER JOIN {$this->table4} ON {$this->table2}.id_pengaduan = {$this->table4}.id_pengaduan
+        LEFT OUTER JOIN {$this->table3} ON {$this->table2}.nik = {$this->table3}.nik";
         $this->db->query($query);
         return $this->db->setResults();
     }
@@ -44,30 +52,41 @@ class Petugas_model
         $query = "INSERT INTO {$this->table4} VALUES(null, :id_pengaduan, :tgl_tanggapan, :tanggapan, :id_petugas)";
         $this->db->query($query);
         $this->db->bind('id_pengaduan', $_POST['id_pengaduan']);
-        $this->db->bind('tgl_tanggapan', $_POST['tgl_tanggapan']);
+        $this->db->bind('tgl_tanggapan', date('Y-m-d'));
         $this->db->bind('tanggapan', $_POST['tanggapan']);
         $this->db->bind('id_petugas', $_POST['id_petugas']);
         return $this->db->rowCount();
     }
 
-    public function updateStatus($status)
+    public function updateTanggapan()
     {
-        if ($this->insertTanggapan() > 0) {
-            $query = "UPDATE {$this->table2} SET status = :status";
-            $this->db->query($query);
-            switch ($_POST['submit']) {
-                case 'Sedang Ditangani':
-                    return header('Location: ' . BASEURL . '/petugas/updateStatus/proses');
-                    exit;
-                case 'Sudah Ditangani':
-                    return header('Location: ' . BASEURL . '/petugas/updateStatus/selesai');
-                    exit;
-                default:
-                    return header('Location: ' . BASEURL . '/petugas/updateStatus/0');
-                    exit;
-            }
-            $this->db->bind('status', $status);
-            return $this->db->rowCount();
+        $query = "UPDATE {$this->table4} SET  tgl_tanggapan = :tgl_tanggapan, tanggapan = :tanggapan, id_petugas = :id_petugas WHERE id_tanggapan = :id_tanggapan";
+        $this->db->query($query);
+        $this->db->bind('id_tanggapan', $_POST['id_tanggapan']);
+        $this->db->bind('tgl_tanggapan', date('Y-m-d'));
+        $this->db->bind('tanggapan', $_POST['tanggapan']);
+        $this->db->bind('id_petugas', $_POST['id_petugas']);
+        return $this->db->rowCount();
+    }
+
+    public function updateStatus()
+    {
+        // if ($this->insertTanggapan() > 0) {
+        $query = "UPDATE {$this->table2} SET status = :status WHERE id_pengaduan = :id_pengaduan";
+        $this->db->query($query);
+        $this->db->bind('id_pengaduan', $_POST['id_pengaduan']);
+        switch ($_POST['submit']) {
+            case 'Belum Ditindaklanjuti':
+                $this->db->bind('status', "0");
+                break;
+            case 'Sedang Ditindaklanjuti':
+                $this->db->bind('status', 'proses');
+                break;
+            case 'Sudah Ditindaklanjuti':
+                $this->db->bind('status', 'selesai');
+                break;
         }
+        return $this->db->rowCount();
+        // }
     }
 }

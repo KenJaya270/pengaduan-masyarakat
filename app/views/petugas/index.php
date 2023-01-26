@@ -37,7 +37,7 @@
     </section>
     <?php foreach ($data['allKeluhan'] as $keluhan) : ?>
         <div class="modal fade" id="exampleModal<?= $keluhan['id_pengaduan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Keluhan <?= $keluhan['nama'] ?></h5>
@@ -45,11 +45,11 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="<?= BASEURL ?>/petugas/updateStatus" method="post">
+                    <form action="<?= ($keluhan['id_tanggapan'] != null) ? BASEURL . '/petugas/updateTanggapan' : BASEURL . '/petugas/insertTanggapan' ?>" method="post">
                         <div class="modal-body">
                             <input type="hidden" name="id_petugas" value="<?= $_SESSION['user-login']['id_petugas'] ?>">
                             <input type="hidden" name="id_pengaduan" value="<?= $keluhan['id_pengaduan'] ?>">
-                            <input type="hidden" name="tgl_tanggapan" id="tgl_tanggapan" value="<?= date('Y-m-d') ?>">
+                            <?= ($keluhan['id_tanggapan'] != null) ? "<input type='hidden' name='id_tanggapan' value='" . $keluhan['id_tanggapan'] . "'>" :  '' ?>
                             <div class="form-group">
                                 <?= date('d M Y', strtotime($keluhan['tgl_pengaduan'])) ?>
                             </div>
@@ -66,20 +66,20 @@
                                 <?php if ($keluhan['status'] == 0) : ?>
                                     <p class="text-danger fw-bolder">Belum Ditangani</p>
                                 <?php elseif ($keluhan['status'] == 'proses') : ?>
-                                    <p class="text-warning fw-bolder">Dalam Penangan</p>
+                                    <p class="text-warning fw-bolder">Dalam Penanganan</p>
                                 <?php else : ?>
                                     <p class="text-success fw-bolder">Sudah Ditangani</p>
                                 <?php endif; ?>
                             </div>
                             <div class="form-group">
                                 <label for="tanggapan">Tanggapan</label>
-                                <textarea class="form-control" name="tanggapan" id="tanggapan" cols="30" rows="10"></textarea>
+                                <textarea class="form-control" name="tanggapan" id="tanggapan" cols="30" rows="10"><?= ($keluhan['id_tanggapan'] != null) ? $keluhan['tanggapan'] : '' ?></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <!-- <input type="submit" class="btn btn-danger" value="Belum Ditangani"> -->
-                            <input type="submit" class="btn btn-warning" value="Sedang Ditangani">
-                            <input type="submit" class="btn btn-success" value="Sudah Ditangani">
+                            <input type="submit" class="btn btn-danger" value="Belum Ditindaklanjuti" name="submit">
+                            <input type="submit" class="btn btn-warning" value="Sedang Ditindaklanjuti" name="submit">
+                            <input type="submit" class="btn btn-success" value="Sudah Ditindaklanjuti" name="submit">
                         </div>
                     </form>
                 </div>

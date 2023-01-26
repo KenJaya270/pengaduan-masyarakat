@@ -24,17 +24,27 @@ class Petugas extends Controller
         $this->view('templates/footer', $data);
     }
 
-    public function updateStatus($status)
+    public function insertTanggapan()
     {
-        if ($this->model('Petugas_model')->updateStatus($status) > 0) {
-            Flasher::setFlash('update', 'success', 'Status Berhasil');
-            header('Location: ' . BASEURL . '/petugas');
-            exit;
-        } else {
-            Flasher::setFlash('update', 'danger', 'Status Gagal');
-            header('Location: ' . BASEURL . '/petugas');
-            exit;
-        }
+        // if ($this->model('Petugas_model')->updateStatus() > 0) {
+        //     Flasher::setFlash('update', 'success', 'Status Berhasil');
+        //     header('Location: ' . BASEURL . '/petugas');
+        //     exit;
+        // } else {
+        //     Flasher::setFlash('update', 'danger', 'Status Gagal');
+        //     header('Location: ' . BASEURL . '/petugas');
+        //     exit;
+        // }
+        $this->model('Petugas_model')->insertTanggapan();
+        $this->model('Petugas_model')->updateStatus();
+        return header('Location: ' . BASEURL . '/petugas');
+    }
+
+    public function updateTanggapan()
+    {
+        $this->model('Petugas_model')->updateTanggapan();
+        $this->model('Petugas_model')->updateStatus();
+        return header('Location: ' . BASEURL . '/petugas');
     }
 
     public function sudahDibaca($id)
